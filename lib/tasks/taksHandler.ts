@@ -1,33 +1,35 @@
 import PgBoss from 'pg-boss';
-import { fetchRedditDataUseCase } from '../useCases/fetchRedditDataUseCase';
-import { config } from './../config'
+import { config } from './../config';
 
 const boss = new PgBoss(config.databaseConnectionUrl);
 
-const processRedditTask = async () => {
-  console.log('Iniciando consulta à API do Reddit');
-  const data = await fetchRedditDataUseCase();
-  return data
-  };
+async function sendToQueue() {
+  try {
+    await boss.start();
+    await boss.send('reddit-task', { message: 'Hello, World!' });
+    console.log('Tarefa enviada para a fila');
+  } catch (error) {
+    console.error('Erro ao enviar tarefa para a fila:', error);
+  } finally {
+    // Dê um tempo para garantir que a tarefa seja processada antes de parar
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    await boss.stop();
+  }
+}
 
-const addTaskToQueue = async () => {
-  await boss.send('redditTask', { message: 'Fetch Reddit API' });
-  console.log('Task added on Queue');
-};
+async function worker() {
+  try {
+    await boss.start();
+    console.log('Processador de tarefas iniciado');
 
-const processJob = async (job: any) => {
-  console.log('Processing Task:', job.data);
-  await processRedditTask();
-};
-
-(async () => {
-  await boss.start();
-  await boss.work('redditTask', processJob);
-})();
-
-process.on('SIGINT', async () => {
-  await boss.stop();
-  process.exit(0);
-});
-
-export { addTaskToQueue };
+    boss.work('reddit-task', async (job: any) => {
+      console.log('Processando tarefa:', job.data.message);
+      // Simule o processamento
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return 'Done';
+    });
+  } catch (error) {
+    console.error('Erro no worker:', error);
+  }
+}
+export { worker, sendToQueue };

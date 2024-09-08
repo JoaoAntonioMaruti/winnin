@@ -2,11 +2,12 @@
   "name": "winnin",
   "module": "lib/index.ts",
   "scripts": {
-    "start": "bun run lib/appEntrypoint.ts"
+    "start": "tsx lib/appEntrypoint.ts"
   },
   "type": "module",
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "tsx": "^4.19.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -16,6 +17,7 @@
     "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2",
     "pg": "^8.12.0",
-    "pg-boss": "^10.1.1"
+    "pg-boss": "^10.1.1",
+    "ts-node": "^10.9.2"
   }
 }

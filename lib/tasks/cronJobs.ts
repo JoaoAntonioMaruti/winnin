@@ -1,7 +1,10 @@
 import cron from 'node-cron';
-import { addTaskToQueue } from './taksHandler';
+import { sendToQueue, worker } from './taksHandler';
 
-cron.schedule("*/10 * * * * *", function() {
-  addTaskToQueue();
+//@TODO - 1 x per day
+cron.schedule("*/1 * * * * *", async function () {
+  worker();
+
+  await sendToQueue();
 });
 
