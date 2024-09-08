@@ -1,5 +1,6 @@
 import PgBoss from 'pg-boss';
-import { config } from './../config';
+import { config } from 'config';
+import { insertRedditPost } from 'core/domain/mutator';
 
 import { fetchTopFromSub } from './../useCases/fetchRedditDataUseCase'
 
@@ -21,8 +22,22 @@ async function worker() {
   try {
     await boss.start();
 
-    boss.work('reddit-task', async (job: any) => {
-      await fetchTopFromSub(job.data.subreddit)
+    boss.work('reddit-task', async ([job]: any) => {
+      const redditResponse = await fetchTopFromSub(job.data.subreddit)
+
+      console.log(redditResponse)
+
+      const data = {
+        title: 'New Reddit Post',
+        author: 'author_name',
+        created_at: new Date(),
+        ups: 10,
+        comments_count: 2
+      }
+
+      insertRedditPost(data)
+
+
       return 'Done';
     });
   } catch (error) {
