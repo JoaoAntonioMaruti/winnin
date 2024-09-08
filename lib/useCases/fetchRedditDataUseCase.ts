@@ -6,11 +6,9 @@ export const fetchRedditDataUseCase = async () => {
   try {
     const data = await fetchJson(REDDIT_URL);
     if (data) {
-      console.log('Dados recebidos do Reddit:', data);
       return data;
     }
   } catch (error) {
-    console.error('Erro ao buscar dados no Use Case:', error);
     return null;
   }
 };

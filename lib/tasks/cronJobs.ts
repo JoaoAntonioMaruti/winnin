@@ -1,3 +1,7 @@
-import { fetchRedditDataUseCase } from './../useCases/fetchRedditDataUseCase';
+import cron from 'node-cron';
+import { addTaskToQueue } from './taksHandler';
 
-//fetchRedditDataUseCase()
+cron.schedule("*/10 * * * * *", function() {
+  addTaskToQueue();
+});
+
