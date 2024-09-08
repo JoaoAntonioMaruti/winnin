@@ -1,4 +1,5 @@
 import { createServer } from 'http';
+import logger from 'infra/logger';
 
 const server = createServer((req, res) => {
   if (req.url === '/') {
@@ -8,8 +9,6 @@ const server = createServer((req, res) => {
   }
 });
 
-const PORT = 4000 || process.env.APP_PORT;
+const HPPT_PORT = 4000 || process.env.APP_PORT;
 
-server.listen(PORT, () => {
-  console.log(`Servidor HTTP rodando na porta ${PORT}`);
-});
+server.listen(HPPT_PORT, () => logger.info(`server is running on ${HPPT_PORT}`));

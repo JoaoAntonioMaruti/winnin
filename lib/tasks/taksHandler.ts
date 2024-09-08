@@ -1,6 +1,7 @@
 import PgBoss from 'pg-boss';
 import { config } from 'config';
 import pipe, { PipelineType } from 'pipeline'
+import logger from 'infra/logger';
 
 const boss = new PgBoss(config.databaseConnectionUrl);
 
@@ -8,9 +9,9 @@ async function sendToQueue() {
   try {
     await boss.start();
     await boss.send('reddit-task', { subreddit: 'artificial' });
-    console.log('Task send to Queue');
+    logger.info('Task send to Queue');
   } catch (error) {
-    console.error('Error to send Task to Queue:', error);
+    logger.error('Error to send Task to Queue:', error);
   } finally {
     await boss.stop();
   }
@@ -21,7 +22,6 @@ async function worker() {
     await boss.start();
 
     boss.work('reddit-task', async ([job]: any) => {
-
       await pipe
         .start(job.data.subreddit)
         .then((p: PipelineType) => p.filterRedditResponse())

@@ -1,4 +1,5 @@
 //@ Fluent Interface design pattern
+import logger from 'infra/logger'
 import { fetchTopFromSub } from 'useCases/fetchRedditDataUseCase';
 import { insertAllRedditPosts } from 'core/domain/mutator';
 
@@ -52,7 +53,7 @@ const pipe: PipelineType = {
   },
 
   async insertAllREdditPosts() {
-    console.log(`Prepare to inser ${this.toInsert.length} reddit posts`)
+    logger.info(`Prepare to insert ${this.toInsert.length} reddit posts`)
 
     this.pipelineResult = await insertAllRedditPosts(this.toInsert)
     return this;
