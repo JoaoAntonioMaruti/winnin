@@ -1,10 +1,10 @@
 import { fetchJson } from '../utils/fetchUtils';
 
-const REDDIT_URL = 'https://api.reddit.com/r/artificial/hot';
+const REDDIT_BASE_URL = 'https://api.reddit.com';
 
-export const fetchRedditDataUseCase = async () => {
+export const fetchTopFromSub = async (subreddit: string) => {
   try {
-    const data = await fetchJson(REDDIT_URL);
+    const data = await fetchJson(`${REDDIT_BASE_URL}/r/${subreddit}/top`);
     if (data) {
       return data;
     }
