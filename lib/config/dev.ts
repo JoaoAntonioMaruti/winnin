@@ -1,5 +1,9 @@
+import dotenv from 'dotenv'
+
+dotenv.config()
+
 const config = {
-	databaseConnectionUrl: 'postgres://postgres:postgres@localhost:5432/winnin_local'
+	databaseConnectionUrl: process.env.DATABASE_CONNECTION_URL || ''
 }
 
 export { config }
