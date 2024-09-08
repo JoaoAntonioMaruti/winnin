@@ -1,64 +1,85 @@
-//@ Fluent Interface design pattern
-import logger from 'infra/logger'
+import logger from 'infra/logger';
 import { fetchTopFromSub } from 'useCases/fetchRedditDataUseCase';
 import { insertAllRedditPosts } from 'core/domain/mutator';
 
 interface RedditResponseData {
-  author_fullname?: string,
-  author?: string,
-  title: string,
-  num_comments: number,
-  ups: number
+  author_fullname?: string;
+  author?: string;
+  title: string;
+  num_comments: number;
+  ups: number;
 }
 
 interface RedditResponseRow {
-  data: RedditResponseData
+  data: RedditResponseData;
 }
 
 interface PipelineType {
-  response?: any,
-  rows?: RedditResponseRow[],
-  toInsert?: any,
-  pipelineResult?: any,
+  response?: any;
+  rows?: RedditResponseRow[];
+  toInsert?: any[];
+  pipelineResult?: any;
   start: (subreddit: string) => Promise<PipelineType>;
   filterRedditResponse: () => Promise<PipelineType>;
   prepareToInsert: () => Promise<PipelineType>;
-  insertAllREdditPosts: () => Promise<PipelineType>,
+  insertAllRedditPosts: () => Promise<PipelineType>;
 }
 
 const pipe: PipelineType = {
   async start(subreddit: string) {
-    this.response = await fetchTopFromSub(subreddit);
-    return this;
+    try {
+      this.response = await fetchTopFromSub(subreddit);
+      logger.info('Fetched Reddit data successfully');
+      return this;
+    } catch (error) {
+      logger.error('Failed to fetch Reddit data', error);
+      throw error;
+    }
   },
 
   async filterRedditResponse() {
-    const { children } = this.response.data;
-    this.rows = children;
+    if (!this.response || !this.response.data) {
+      logger.warn('No response data to filter');
+      return this;
+    }
+
+    this.rows = this.response.data.children;
+    logger.info('Filtered Reddit response successfully');
     return this;
   },
 
   async prepareToInsert() {
-    this.toInsert = this.rows?.map(({ data }: RedditResponseRow) => {
-      const {author_fullname: author, title, ups, num_comments: comments_count} = data
+    if (!this.rows) {
+      logger.warn('No rows to prepare');
+      return this;
+    }
 
+    this.toInsert = this.rows.map(({ data }) => {
+      const { author_fullname: author, title, ups, num_comments: comments_count } = data;
       return {
         author,
         title,
         ups,
-        comments_count
-      }
-    })
+        comments_count,
+      };
+    });
+    logger.info('Prepared data for insertion');
     return this;
   },
 
-  async insertAllREdditPosts() {
-    logger.info(`Prepare to insert ${this.toInsert.length} reddit posts`)
+  async insertAllRedditPosts() {
+    if (!this.toInsert) {
+      logger.warn('No data to insert');
+      return this;
+    }
 
-    this.pipelineResult = await insertAllRedditPosts(this.toInsert)
+    logger.info(`Prepare to insert ${this.toInsert.length} Reddit posts`);
+    this.pipelineResult = await insertAllRedditPosts(this.toInsert);
+    logger.info('Inserted all Reddit posts successfully');
     return this;
-  }
+  },
 };
 
 export default pipe;
 export { PipelineType };
+

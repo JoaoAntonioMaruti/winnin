@@ -26,13 +26,13 @@ async function worker() {
         .start(job.data.subreddit)
         .then((p: PipelineType) => p.filterRedditResponse())
         .then((p: PipelineType) => p.prepareToInsert())
-        .then((p: PipelineType) => p.insertAllREdditPosts())
+        .then((p: PipelineType) => p.insertAllRedditPosts())
         .catch(error => console.error('Pipeline Error:', error));
 
       return 'Done';
     });
   } catch (error) {
-    console.error('Worker error:', error);
+    logger.error('Worker error:', error);
   }
 }
 export { worker, sendToQueue };
