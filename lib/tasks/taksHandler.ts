@@ -1,8 +1,6 @@
 import PgBoss from 'pg-boss';
 import { config } from 'config';
-import { insertRedditPost } from 'core/domain/mutator';
-
-import { fetchTopFromSub } from './../useCases/fetchRedditDataUseCase'
+import pipe, { PipelineType } from 'pipeline'
 
 const boss = new PgBoss(config.databaseConnectionUrl);
 
@@ -23,20 +21,13 @@ async function worker() {
     await boss.start();
 
     boss.work('reddit-task', async ([job]: any) => {
-      const redditResponse = await fetchTopFromSub(job.data.subreddit)
 
-      console.log(redditResponse)
-
-      const data = {
-        title: 'New Reddit Post',
-        author: 'author_name',
-        created_at: new Date(),
-        ups: 10,
-        comments_count: 2
-      }
-
-      insertRedditPost(data)
-
+      await pipe
+        .start(job.data.subreddit)
+        .then((p: PipelineType) => p.filterRedditResponse())
+        .then((p: PipelineType) => p.prepareToInsert())
+        .then((p: PipelineType) => p.insertAllREdditPosts())
+        .catch(error => console.error('Pipeline Error:', error));
 
       return 'Done';
     });
