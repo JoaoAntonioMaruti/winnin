@@ -3,7 +3,6 @@ import { gql } from 'apollo-server-express';
 
 const rootSchema = gql`
   type Query
-  type Mutation
 `;
 
 const typeDefs = [

@@ -5,16 +5,18 @@ const postSchema = gql`
     id: ID!
     title: String!
     author: String!
-    createdAt: String!
+    created_at: String!
     ups: Int!
-    comments: Int!
+    comments_count: Int
   }
 
   type Query {
-    posts: [Post!]!
+    posts(
+      startDate: String!,
+      endDate: String!,
+      sortBy: String!
+    ): [Post!]!
   }
-
-  type Mutation {}
 `;
 
 export default postSchema;

@@ -1,9 +1,9 @@
 import logger from 'infra/logger';
-import { ApolloServer } from '@apollo/server';
 import { config } from 'config';
 import { resolvers } from 'adapters/graphql/resolvers';
-import { startStandaloneServer } from '@apollo/server/standalone';
 import { typeDefs } from 'adapters/graphql/schemas';
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
 
 const server = new ApolloServer({
   typeDefs,
