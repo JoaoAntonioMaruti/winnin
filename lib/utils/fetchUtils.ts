@@ -1,3 +1,4 @@
+import logger from 'infra/logger';
 import fetch from 'node-fetch';
 
 export const fetchJson = async (url: string) => {
@@ -8,7 +9,7 @@ export const fetchJson = async (url: string) => {
     }
     return await response.json();
   } catch (error) {
-    console.error('Error in fetchJson:', error);
+    logger.error('Error in fetchJson:', error);
     return null;
   }
 };

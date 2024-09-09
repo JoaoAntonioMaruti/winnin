@@ -27,7 +27,7 @@ async function worker() {
         .then((p: PipelineType) => p.filterRedditResponse())
         .then((p: PipelineType) => p.prepareToInsert())
         .then((p: PipelineType) => p.insertAllRedditPosts())
-        .catch(error => console.error('Pipeline Error:', error));
+        .catch(error => logger.error('Pipeline Error:', error));
 
       return 'Done';
     });
