@@ -5,6 +5,7 @@ import logger from 'infra/logger';
 interface InsertRepository<T> {
   insert(data: T): Promise<string>;
   insertAll(data: T[]): Promise<string[]>;
+<<<<<<< Updated upstream
   list(options?: ListOptions): Promise<T[]>;
 }
 
@@ -16,7 +17,17 @@ interface ListOptions {
   groupBy?: string;
   selectFields?: string[];
   sumFields?: { field: string, alias: string }[];  // Atualizando o tipo de sumFields
+=======
+  //list(options?: ListOptions): Promise<T[]>;
+>>>>>>> Stashed changes
 }
+
+//interface ListOptions {
+  //sortBy?: string;
+  //order?: 'asc' | 'desc';
+  //startDate?: string;
+  //endDate?: string;
+//}
 
 const knex = Knex(config.databaseConnectionUrl);
 
@@ -74,7 +85,8 @@ const repository = <T>(tableName: string): InsertRepository<T> => {
         logger.error('Error listing data:', error);
         throw error;
       }
-    }
+    },
+
   };
 };
 

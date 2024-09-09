@@ -1,0 +1,21 @@
+import { redditPostQueue } from 'infra/queue/redditPostQueue';
+import { redditPostWorker } from 'infra/worker/redditPostWorker';
+import config from 'config';
+import cron from 'node-cron';
+import logger from 'infra/logger';
+
+//@TODO - 1 x per day
+export default async function createCronSchedules() {
+  if (config.executeScheduledJobs) {
+    cron.schedule("*/1 * * * * *", async () => {
+      redditPostWorker();
+
+      await redditPostQueue();
+    });
+    return
+  }
+
+  logger.warn("Cron job bypass");
+  return
+}
+

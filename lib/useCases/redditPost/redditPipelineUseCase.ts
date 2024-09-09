@@ -6,7 +6,7 @@ interface RedditResponseData {
   author_fullname?: string;
   author?: string;
   title: string;
-  comments_count: number;
+  num_comments: number;
   ups: number;
 }
 
@@ -55,12 +55,12 @@ const pipe: PipelineType = {
     }
 
     this.toInsert = this.rows.map(({ data }) => {
-      const { author_fullname: author, title, ups, comments_count } = data;
+      const { author_fullname: author, title, ups, num_comments } = data;
       return {
         author,
         title,
         ups,
-        comments_count,
+        comments_count: num_comments,
       };
     });
     logger.info('Prepared data for insertion');

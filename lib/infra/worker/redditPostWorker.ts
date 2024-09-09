@@ -5,19 +5,7 @@ import logger from 'infra/logger';
 
 const boss = new PgBoss(config.databaseConnectionUrl);
 
-async function sendToQueue() {
-  try {
-    await boss.start();
-    await boss.send('reddit-task', { subreddit: 'artificial' });
-    logger.info('Task send to Queue');
-  } catch (error) {
-    logger.error('Error to send Task to Queue:', error);
-  } finally {
-    await boss.stop();
-  }
-}
-
-async function worker() {
+async function redditPostWorker() {
   try {
     await boss.start();
 
@@ -35,4 +23,4 @@ async function worker() {
     logger.error('Worker error:', error);
   }
 }
-export { worker, sendToQueue };
+export { redditPostWorker };

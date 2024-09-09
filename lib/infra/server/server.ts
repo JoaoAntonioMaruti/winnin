@@ -10,11 +10,11 @@ const server = new ApolloServer({
   resolvers,
 });
 
-(async () => {
+export default async function startServer() {
   const port = config.appPort as number
   const { url } = await startStandaloneServer(server, {
     listen: { port: port },
   });
 
   logger.info(`GraphQL server running on ${url}`);
-})();
+}

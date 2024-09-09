@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { listRedditPost } from 'useCases/redditPost/loader'
 
 interface PostArgs {
@@ -19,6 +20,17 @@ const postResolver = {
       const posts = await listRedditPost({sortBy, startDate: start, endDate: end})
 
       return posts;
+=======
+//import { listRedditPost } from 'core/domain/loader'
+
+const postResolver = {
+  Query: {
+    posts: () => {
+      //const posts = listRedditPost({sortBy: 'ups'})
+      //console.log(posts)
+
+      return [];
+>>>>>>> Stashed changes
     },
 
     authors: async (_: any, { sortBy }: AuthorArgs) => {
