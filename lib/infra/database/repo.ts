@@ -13,6 +13,9 @@ interface ListOptions {
   order?: 'asc' | 'desc';
   startDate?: string;
   endDate?: string;
+  groupBy?: string;
+  selectFields?: string[];
+  sumFields?: { field: string, alias: string }[];  // Atualizando o tipo de sumFields
 }
 
 const knex = Knex(config.databaseConnectionUrl);
@@ -47,12 +50,18 @@ const repository = <T>(tableName: string): InsertRepository<T> => {
       }
     },
 
-    async list(options?: ListOptions): Promise<T[]> {
+     async list(options?: ListOptions): Promise<T[]> {
       try {
-        let query = knex(tableName).select('*');
+        let query = knex(tableName).select(options?.selectFields || '*');
 
-        if (options?.startDate && options?.endDate) {
-          query = query.whereBetween('created_at', [options.startDate, options.endDate]);
+        if (options?.sumFields) {
+          options.sumFields.forEach(({ field, alias }) => {
+            query = query.sum({ [alias]: field });
+          });
+        }
+
+        if (options?.groupBy) {
+          query = query.groupBy(options.groupBy);
         }
 
         if (options?.sortBy) {

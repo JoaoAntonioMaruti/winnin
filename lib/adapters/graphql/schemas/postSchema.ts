@@ -7,7 +7,13 @@ const postSchema = gql`
     author: String!
     created_at: String!
     ups: Int!
-    comments_count: Int
+    comments_count: Int!
+  }
+
+  type Author {
+    author: String!
+    total_ups: String!
+    total_comments:  String!
   }
 
   type Query {
@@ -16,7 +22,11 @@ const postSchema = gql`
       endDate: String!,
       sortBy: String!
     ): [Post!]!
+
+    authors(
+      sortBy: String!
+    ): [Author!]!
   }
-`;
+ `;
 
 export default postSchema;
