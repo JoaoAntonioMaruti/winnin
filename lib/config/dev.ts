@@ -12,4 +12,4 @@ const config: AppConfigInterface = {
 	appPort: process.env.APP_PORT || 4000
 }
 
-export { config }
+export default config

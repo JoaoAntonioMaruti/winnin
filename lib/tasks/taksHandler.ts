@@ -1,6 +1,6 @@
 import PgBoss from 'pg-boss';
-import { config } from 'config';
-import pipe, { PipelineType } from 'pipeline'
+import config from 'config';
+import pipe, { PipelineType } from 'useCases/redditPost/redditPipelineUseCase'
 import logger from 'infra/logger';
 
 const boss = new PgBoss(config.databaseConnectionUrl);

@@ -1,4 +1,4 @@
-import { listRedditPost } from 'core/domain/loader'
+import { listRedditPost } from 'useCases/redditPost/loader'
 
 interface PostArgs {
   startDate: string

@@ -1,2 +1,3 @@
-export { config } from "./dev"
+import config from "./dev";
 
+export default config

@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import { config } from 'config';
+import config from 'config';
 import logger from 'infra/logger';
 
 interface InsertRepository<T> {
@@ -31,7 +31,7 @@ const repository = <T>(tableName: string): InsertRepository<T> => {
         const [id] = await knex(tableName).insert(toInsert).returning('id');
         return id;
       } catch (error) {
-        console.error('Error inserting data:', error);
+        logger.error('Error inserting data:', error);
         throw error;
       }
     },

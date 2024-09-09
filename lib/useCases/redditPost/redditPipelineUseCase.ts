@@ -1,6 +1,6 @@
 import logger from 'infra/logger';
-import { fetchTopFromSub } from 'useCases/fetchRedditDataUseCase';
-import { insertAllRedditPosts } from 'core/domain/mutator';
+import { fetchTopFromSub } from 'useCases/redditPost/fetchRedditDataUseCase';
+import { insertAllRedditPosts } from 'useCases/redditPost/mutator';
 
 interface RedditResponseData {
   author_fullname?: string;
