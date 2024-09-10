@@ -14,10 +14,17 @@
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./lib",
+    "baseUrl": ".",
+    "allowJs": true,
+    "rootDir": "./lib",
     "paths": {
-      "@config/*": ["./lib/config"]
-    },
-    "allowJs": true
-  }
+      "@infra/*": ["lib/infra/*"],
+      "@usecases/*": ["lib/usecases/*"],
+      "@core/*": ["lib/core/*"],
+      "@config/*": ["lib/config/*"],
+      "@utils/*": ["lib/utils/*"]
+    }
+  },
+  "include": ["lib/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules"]
 }

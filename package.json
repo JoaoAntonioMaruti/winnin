@@ -2,11 +2,16 @@
   "name": "winnin",
   "module": "lib/index.ts",
   "scripts": {
-    "start": "tsx lib/appEntrypoint.ts"
+    "start": "tsx lib/appEntrypoint.ts",
+    "test": "jest --runInBand"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/node-cron": "^3.0.11",
     "bun-types": "latest",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
     "tsx": "^4.19.0"
   },
   "peerDependencies": {
