@@ -1,8 +1,8 @@
-import postResolver from './postResolver';
+import redditPostResolver from './redditPostResolver';
 
 const resolvers = {
   Query: {
-    ...postResolver.Query,
+    ...redditPostResolver.Query,
   }
 };
 

@@ -1,4 +1,4 @@
-import postSchema from './postSchema';
+import redditPostSchema from './redditPostSchema';
 import { gql } from 'apollo-server-express';
 
 const rootSchema = gql`
@@ -7,7 +7,7 @@ const rootSchema = gql`
 
 const typeDefs = [
   rootSchema,
-  postSchema
+  redditPostSchema
 ];
 
 export { typeDefs };

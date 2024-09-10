@@ -5,7 +5,6 @@ import logger from 'infra/logger';
 interface InsertRepository<T> {
   insert(data: T): Promise<string>;
   insertAll(data: T[]): Promise<string[]>;
-<<<<<<< Updated upstream
   list(options?: ListOptions): Promise<T[]>;
 }
 
@@ -16,18 +15,8 @@ interface ListOptions {
   endDate?: string;
   groupBy?: string;
   selectFields?: string[];
-  sumFields?: { field: string, alias: string }[];  // Atualizando o tipo de sumFields
-=======
-  //list(options?: ListOptions): Promise<T[]>;
->>>>>>> Stashed changes
+  sumFields?: { field: string, alias: string }[];
 }
-
-//interface ListOptions {
-  //sortBy?: string;
-  //order?: 'asc' | 'desc';
-  //startDate?: string;
-  //endDate?: string;
-//}
 
 const knex = Knex(config.databaseConnectionUrl);
 
@@ -86,7 +75,6 @@ const repository = <T>(tableName: string): InsertRepository<T> => {
         throw error;
       }
     },
-
   };
 };
 
