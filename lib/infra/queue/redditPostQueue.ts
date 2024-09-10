@@ -1,6 +1,6 @@
 import PgBoss from 'pg-boss';
-import config from 'config';
-import logger from 'infra/logger';
+import config from '@lib/config';
+import logger from '@infra/logger';
 
 const boss = new PgBoss(config.databaseConnectionUrl);
 

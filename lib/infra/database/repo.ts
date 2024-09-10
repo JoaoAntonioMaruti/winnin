@@ -1,6 +1,6 @@
 import Knex from 'knex';
-import config from 'config';
-import logger from 'infra/logger';
+import config from '@lib/config';
+import logger from '@infra/logger';
 
 interface InsertRepository<T> {
   insert(data: T): Promise<string>;

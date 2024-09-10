@@ -18,10 +18,12 @@
     "allowJs": true,
     "rootDir": "./lib",
     "paths": {
+      "@lib/*": ["lib/*"],
       "@infra/*": ["lib/infra/*"],
       "@usecases/*": ["lib/usecases/*"],
       "@core/*": ["lib/core/*"],
       "@config/*": ["lib/config/*"],
+      "@adapters/*": ["lib/adapters/*"],
       "@utils/*": ["lib/utils/*"]
     }
   },

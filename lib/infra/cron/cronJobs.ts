@@ -1,8 +1,8 @@
-import { redditPostQueue } from 'infra/queue/redditPostQueue';
-import { redditPostWorker } from 'infra/worker/redditPostWorker';
-import config from 'config';
+import config from '@lib/config';
 import cron from 'node-cron';
-import logger from 'infra/logger';
+import logger from '@infra/logger';
+import { redditPostQueue } from '@infra/queue/redditPostQueue';
+import { redditPostWorker } from '@infra/worker/redditPostWorker';
 
 //@TODO - 1 x per day
 export default async function createCronSchedules() {

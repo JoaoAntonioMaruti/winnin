@@ -1,4 +1,4 @@
-import { fetchJson } from 'utils/fetchUtils';
+import { fetchJson } from '@utils/fetchUtils';
 
 const REDDIT_BASE_URL = 'https://api.reddit.com';
 

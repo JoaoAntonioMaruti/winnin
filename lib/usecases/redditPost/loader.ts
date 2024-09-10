@@ -1,4 +1,4 @@
-import repo from 'infra/database/repo'
+import repo from '@infra/database/repo'
 
 interface RedditPost {
 	id: string

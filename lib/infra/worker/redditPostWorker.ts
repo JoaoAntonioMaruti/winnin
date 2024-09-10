@@ -1,7 +1,7 @@
 import PgBoss from 'pg-boss';
-import config from 'config';
-import pipe, { PipelineType } from 'useCases/redditPost/redditPipelineUseCase'
-import logger from 'infra/logger';
+import config from '@lib/config';
+import pipe, { PipelineType } from '@usecases/redditPost/redditPipelineUseCase'
+import logger from '@infra/logger';
 
 const boss = new PgBoss(config.databaseConnectionUrl);
 

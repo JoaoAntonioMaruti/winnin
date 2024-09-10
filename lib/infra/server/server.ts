@@ -1,7 +1,7 @@
-import logger from 'infra/logger';
-import config from 'config';
-import { resolvers } from 'adapters/graphql/resolvers';
-import { typeDefs } from 'adapters/graphql/schemas';
+import logger from '@infra/logger';
+import config from '@lib/config';
+import { resolvers } from '@adapters/graphql/resolvers';
+import { typeDefs } from '@adapters/graphql/schemas';
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 

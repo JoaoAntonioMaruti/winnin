@@ -1,4 +1,4 @@
-import logger from 'infra/logger';
+import logger from '@infra/logger';
 import fetch from 'node-fetch';
 
 export const fetchJson = async (url: string) => {
