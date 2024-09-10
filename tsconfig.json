@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "allowJs": true,
-    "rootDir": "./lib",
+    "rootDir": "./",
     "paths": {
       "@lib/*": ["lib/*"],
       "@infra/*": ["lib/infra/*"],
