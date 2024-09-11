@@ -1,3 +1,3 @@
-import config from "./dev";
+import config from "./config";
 
 export default config
