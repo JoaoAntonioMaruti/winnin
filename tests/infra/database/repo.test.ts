@@ -27,11 +27,14 @@ describe('Repository', () => {
     });
   });
 
-  afterAll(() => {
+  afterAll(async () => {
+    await knex.schema.dropTable('users');
     tracker.uninstall();
+    await knex.destroy();
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    await knex('users').truncate();
     tracker.on('query', (query: any) => {
       if (query.method === 'insert') {
         query.response([1]);
@@ -44,7 +47,7 @@ describe('Repository', () => {
   it('should insert data and return an id', async () => {
     const mockData = { name: 'João Milagres', age: 30 };
 
-    const {id: id} : any = await repo.insert(mockData);
+    const { id }: any = await repo.insert(mockData);
 
     expect(id).toBe(1);
   });
@@ -52,7 +55,7 @@ describe('Repository', () => {
   it('should handle errors on insert', async () => {
     const mockData = { invalid_data: 'some_value' };
 
-    expect(repo.insert(mockData)).rejects.toThrow();
+    await expect(repo.insert(mockData)).rejects.toThrow();
   });
 
   it('should insert multiple data and return ids', async () => {
@@ -60,13 +63,13 @@ describe('Repository', () => {
 
     const ids = await repo.insertAll(mockData);
 
-    expect(ids).toEqual([{id: 1}, {id: 2}]);
+    expect(ids).toEqual([{ id: 1 }, { id: 2 }]);
   });
 
   it('should handle errors on insertAll', async () => {
     const mockData = [{ invalid_data: 'some_value' }];
 
-    expect(repo.insertAll(mockData)).rejects.toThrow();
+    await expect(repo.insertAll(mockData)).rejects.toThrow();
   });
 
   it('should list data with optional filters', async () => {
@@ -85,8 +88,8 @@ describe('Repository', () => {
 
     const result: any = results[0];
 
-    expect(result.name).toEqual(mockData.name)
-    expect(result.age).toEqual(mockData.age)
+    expect(result.name).toEqual(mockData.name);
+    expect(result.age).toEqual(mockData.age);
   });
 });
 

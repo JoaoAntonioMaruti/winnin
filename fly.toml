@@ -1,22 +1,20 @@
-# fly.toml app configuration file generated for winnin-purple-rain-2066 on 2024-09-11T01:15:31-03:00
+# fly.toml app configuration file generated for winnin on 2024-09-11T01:28:54-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'winnin-purple-rain-2066'
+app = 'winnin'
 primary_region = 'gru'
 
 [build]
 
 [http_service]
-  internal_port = 3000
+  internal_port = 4000
   force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
 
 [[vm]]
-  memory = '1gb'
+  memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
