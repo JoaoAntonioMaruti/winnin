@@ -17,7 +17,7 @@ describe('createCronSchedules', () => {
     expect(cron.schedule).toHaveBeenCalledWith("0 0 * * *", expect.any(Function));
   });
 
-it('should log a warning and not schedule a cron job when executeScheduledJobs is false', async () => {
+  it('should log a warning and not schedule a cron job when executeScheduledJobs is false', async () => {
     await createCronSchedules(false);
 
     expect(cron.schedule).not.toHaveBeenCalled();
