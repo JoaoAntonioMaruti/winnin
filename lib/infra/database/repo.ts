@@ -20,7 +20,7 @@ interface ListOptions {
 
 const knex = Knex(config.databaseConnectionUrl);
 
-const repository = <T>(tableName: string): InsertRepository<T> => {
+const repository = <T>(tableName: string, knexInstance: any = knex): InsertRepository<T> => {
   return {
     async insert(data: T): Promise<string> {
       try {
@@ -28,7 +28,7 @@ const repository = <T>(tableName: string): InsertRepository<T> => {
           ...data,
           created_at: new Date()
         }
-        const [id] = await knex(tableName).insert(toInsert).returning('id');
+        const [id] = await knexInstance(tableName).insert(toInsert).returning('id');
         return id;
       } catch (error) {
         logger.error('Error inserting data:', error);
@@ -42,7 +42,7 @@ const repository = <T>(tableName: string): InsertRepository<T> => {
           return {...row, created_at: new Date()}
         })
 
-        const ids = await knex(tableName).insert(toInsert).returning('id');
+        const ids = await knexInstance(tableName).insert(toInsert).returning('id');
         return ids;
       } catch (error) {
         logger.error('Error inserting data:', error);
@@ -52,7 +52,7 @@ const repository = <T>(tableName: string): InsertRepository<T> => {
 
      async list(options?: ListOptions): Promise<T[]> {
       try {
-        let query = knex(tableName).select(options?.selectFields || '*');
+        let query = knexInstance(tableName).select(options?.selectFields || '*');
 
         if (options?.sumFields) {
           options.sumFields.forEach(({ field, alias }) => {
@@ -78,4 +78,5 @@ const repository = <T>(tableName: string): InsertRepository<T> => {
   };
 };
 
+export { ListOptions }
 export default repository;
