@@ -11,7 +11,7 @@ interface AppConfigInterface {
 const config: AppConfigInterface = {
 	databaseConnectionUrl: process.env.DATABASE_CONNECTION_URL || '',
 	appPort: process.env.APP_PORT || 4000,
-	executeScheduledJobs: true
+	executeScheduledJobs: false
 }
 
 export default config

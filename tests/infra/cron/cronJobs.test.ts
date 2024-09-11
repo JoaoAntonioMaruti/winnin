@@ -14,7 +14,7 @@ describe('createCronSchedules', () => {
   it('should schedule a cron job when executeScheduledJobs is true', async () => {
     await createCronSchedules(true);
 
-    expect(cron.schedule).toHaveBeenCalledWith("*/1 * * * * *", expect.any(Function));
+    expect(cron.schedule).toHaveBeenCalledWith("0 0 * * *", expect.any(Function));
   });
 
 it('should log a warning and not schedule a cron job when executeScheduledJobs is false', async () => {

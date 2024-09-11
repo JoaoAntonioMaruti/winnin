@@ -4,10 +4,9 @@ import logger from '@infra/logger';
 import { redditPostQueue } from '@infra/queue/redditPostQueue';
 import { redditPostWorker } from '@infra/worker/redditPostWorker';
 
-//@TODO - 1 x per day
 export default async function createCronSchedules(executeScheduledJobs = config.executeScheduledJobs) {
   if (executeScheduledJobs) {
-    cron.schedule("*/1 * * * * *", async () => {
+    cron.schedule('0 0 * * *', async () => {
       redditPostWorker();
 
       await redditPostQueue();
