@@ -4,7 +4,7 @@ Este projeto é um desafio técnico que implementa uma API utilizando várias te
 
 ## Como Subir o Projeto
 
-1. Clone o repositório:
+Clone o repositório:
 
 ```bash
 git clone https://github.com/JoaoAntonioMaruti/winnin.git
@@ -63,18 +63,18 @@ docker-compose up
 
 O projeto segue uma Clean Architecture, garantindo uma separação clara de responsabilidades e fácil manutenção:
 
- - Apresentação (GraphQL API): Interface de interação com o cliente por meio de queries e mutations.
- - Aplicação (Use Cases): Lógica de negócios central, como gerenciamento de filas e tarefas.
- - Domínio: Define as regras de negócio e entidades principais.
- - Infraestrutura: Comunicação com o banco de dados (via Knex.js) e gerenciamento de filas (com pg-boss).
+ - **Apresentação (GraphQL API)**: Interface de interação com o cliente por meio de queries e mutations.
+ - **Aplicação (Use Cases)**: Lógica de negócios central, como gerenciamento de filas e tarefas.
+ - **Domínio**: Define as regras de negócio e entidades principais.
+ - **Infraestrutura**: Comunicação com o banco de dados (via Knex.js) e gerenciamento de filas (com pg-boss).
 
 ## Design Patterns
 
- - CQRS (Command Query Responsibility Segregation): Separa comandos (escrita) de consultas (leitura) para otimizar o sistema.
- - Chain of Responsibility: Processamento de requisições em cadeias de handlers.
- - Repository Pattern: Centraliza a lógica de persistência no banco de dados.
- - Factory Pattern: Facilita a criação de instâncias para serviços e repositórios.
- - Decorator Pattern: Adiciona responsabilidades extras a funções sem modificá-las diretamente.
+ - **CQRS (Command Query Responsibility Segregation)**: Separa comandos (escrita) de consultas (leitura)
+ - **Chain of Responsibility**: Processamento de requisições em cadeias de handlers.
+ - **Repository Pattern**: Centraliza a lógica de persistência no banco de dados.
+ - **Factory Pattern**: Facilita a criação de instâncias para serviços e repositórios.
+ - **Decorator Pattern**: Adiciona responsabilidades extras a funções sem modificá-las diretamente.
 
 ## Pontos Fortes
  - Modularidade e Escalabilidade: O uso de CQRS e pg-boss garante uma arquitetura escalável e de fácil manutenção.
@@ -82,7 +82,9 @@ O projeto segue uma Clean Architecture, garantindo uma separação clara de resp
  - Docker: Facilita a configuração do ambiente e o gerenciamento de dependências.
 
 ## Pontos de Melhoria
- - Utilizar validações de schema na camada de domain: Implementar validações de entidade na camada de domínio para garantir consistência de dados.
- - Aumentar a cobertura de testes em geral: Expandir a cobertura para incluir mais cenários, garantindo robustez do sistema em produção.
- - Tratamento de Erros: Um sistema de logging mais robusto e integração com monitoramento de erros (ex.: Sentry) seria bom.
-
+ - **Utilizar validações de schema na camada de domain**: Implementar validações de entidade na camada de domínio para garantir consistência de dados.
+ - **kAumentar a cobertura de testes em geral**: Expandir a cobertura para incluir mais cenários, garantindo robustez do sistema em produção.
+ - **Tratamento de Erros**: Um sistema de logging mais robusto e integração com monitoramento de erros (ex.: Sentry) seria bom.
+ - **Embora utilize um sistema de filas**, essas filas são gerenciadas pelo mesmo banco de dados da aplicação, o que pode gerar gargalos. Duas soluções recomendadas:
+   - Utilizar outro banco de dados como Redis para filas mais leves.
+   - Adotar sistemas de filas mais robustos, como **[RabbitMQ](https://www.rabbitmq.com/)**, **[Kafka](https://kafka.apache.org/)** ou **[Amazon SQS](https://aws.amazon.com/sqs/)** e etc....
