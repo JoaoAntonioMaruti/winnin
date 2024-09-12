@@ -22,10 +22,25 @@ yarn
 
 Crie um arquivo .env com base no .env.example e ajuste as variáveis de ambiente de acordo com suas configurações locais.
 
+ - `DATABASE_CONNECTION_URL`: url de conexão com o banco de dados
+ - `APP_PORT`: porta que deseja usar para subir o servidor http, por padrão é usada a `4000`
+ - `CRON_SCHEDULE_CONFIG`: Configuração para rodar programados, por padrão é: `0 0 * * *`
+    - 0: minuto 0
+    - 0: hora 0 (meia-noite)
+    - *: qualquer dia do mês
+    - *: qualquer mês
+    - *: qualquer dia da semana
+
+### Crie o banco de dados
+
+```bash
+npm run db:create
+```
+
 ### Execute as migrações para configurar o banco de dados:
 
 ```bash
-npm run migrate
+npm run db:migrate
 ```
 
 ### Para rodar o servidor em modo de desenvolvimento:
@@ -38,12 +53,6 @@ npm run dev
 
 ```bash
 npm run test
-```
-
-## Ou suba com Docker
-
-```
-docker-compose up
 ```
 
 ## Tech Stack
@@ -70,21 +79,23 @@ O projeto segue uma Clean Architecture, garantindo uma separação clara de resp
 
 ## Design Patterns
 
- - **CQRS (Command Query Responsibility Segregation)**: Separa comandos (escrita) de consultas (leitura)
- - **Chain of Responsibility**: Processamento de requisições em cadeias de handlers.
- - **Repository Pattern**: Centraliza a lógica de persistência no banco de dados.
- - **Factory Pattern**: Facilita a criação de instâncias para serviços e repositórios.
- - **Decorator Pattern**: Adiciona responsabilidades extras a funções sem modificá-las diretamente.
+ - [x] **CQRS (Command Query Responsibility Segregation)**: Separa comandos [(escrita)](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/usecases/redditPost/mutator.ts) de consultas [(leitura)](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/usecases/redditPost/loader.ts)
+ - [x] **Chain of Responsibility**: Processamento de requisições em cadeias de handlers, ex da implementação [aqui](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/usecases/redditPost/redditPipelineUseCase.ts) e chamada [aqui](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/infra/worker/redditPostWorker.ts#L13).
+ - [x] **Repository Pattern**: Centraliza a lógica de persistência no banco de dados, ex: [aqui](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/infra/database/repo.ts).
+ - [x] **Factory Pattern**: Facilita a criação de instâncias para serviços e repositórios.
+ - [x] **Decorator Pattern**: Adiciona responsabilidades extras a funções sem modificá-las diretamente.
 
 ## Pontos Fortes
+
  - **Modularidade e Escalabilidade**: O uso de CQRS e pg-boss garante uma arquitetura escalável e de fácil manutenção.
  - **Boas Práticas**: O código é estruturado com boas práticas como Clean Architecture, Design Patterns e testes automatizados.
- - **Docker**: Facilita a configuração do ambiente e o gerenciamento de dependências.
 
-## Pontos de Melhoria
- - **Utilizar validações de schema na camada de domain**: Implementar validações de entidade na camada de domínio para garantir consistência de dados.
- - **kAumentar a cobertura de testes em geral**: Expandir a cobertura para incluir mais cenários, garantindo robustez do sistema em produção.
- - **Tratamento de Erros**: Um sistema de logging mais robusto e integração com monitoramento de erros (ex.: Sentry) seria bom.
- - **Embora utilize um sistema de filas**, essas filas são gerenciadas pelo mesmo banco de dados da aplicação, o que pode gerar gargalos. Duas soluções recomendadas:
+## Pontos de Melhoria/TODO
+
+ - [ ] **Utilizar validações de schema na camada de domain**: Implementar validações de entidade na camada de domínio para garantir consistência de dados.
+ - [ ] **Aumentar a cobertura de testes em geral**: Expandir a cobertura para incluir mais cenários, garantindo robustez do sistema em produção.
+ - [ ] **Tratamento de Erros**: Um sistema de logging mais robusto e integração com monitoramento de erros (ex.: Sentry) seria bom.
+ - [ ] **Deploy e distribuiÇão**: Não terminei de configurar o deploy com fly.io (por isso a configuração do Docker não está pronta), mas tenho outros serviços que rodam por lá.
+ - [ ] **Embora utilize um sistema de filas**, essas filas são gerenciadas pelo mesmo banco de dados da aplicação, o que pode gerar gargalos. Duas soluções recomendadas:
    - Utilizar outro banco de dados como Redis para filas mais leves.
    - Adotar sistemas de filas mais robustos, como **[RabbitMQ](https://www.rabbitmq.com/)**, **[Kafka](https://kafka.apache.org/)** ou **[Amazon SQS](https://aws.amazon.com/sqs/)** e etc....

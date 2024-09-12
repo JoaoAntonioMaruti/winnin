@@ -20,13 +20,14 @@ describe('redditPostWorker', () => {
   });
 
   it('should start PgBoss and work on the "reddit-task" queue', async () => {
-    await redditPostWorker();
+    const taskName = 'reddit-task';
+    await redditPostWorker(taskName);
 
     expect(PgBoss.prototype.start).toHaveBeenCalled();
 
     const mockWork: any = PgBoss.prototype.work
 
-    expect(mockWork).toHaveBeenCalledWith('reddit-task', expect.any(Function));
+    expect(mockWork).toHaveBeenCalledWith(taskName, expect.any(Function));
 
     const job = { data: { subreddit: 'test-subreddit' } };
     const workerFunction = mockWork.mock.calls[0][1];
