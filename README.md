@@ -16,7 +16,7 @@ cd winnin
 ```bash
 npm install
 # ou
-yarn install
+yarn
 ```
 ## Configure o arquivo .env:
 
@@ -77,9 +77,9 @@ O projeto segue uma Clean Architecture, garantindo uma separação clara de resp
  - **Decorator Pattern**: Adiciona responsabilidades extras a funções sem modificá-las diretamente.
 
 ## Pontos Fortes
- - Modularidade e Escalabilidade: O uso de CQRS e pg-boss garante uma arquitetura escalável e de fácil manutenção.
- - Boas Práticas: O código é estruturado com boas práticas como Clean Architecture, Design Patterns e testes automatizados.
- - Docker: Facilita a configuração do ambiente e o gerenciamento de dependências.
+ - **Modularidade e Escalabilidade**: O uso de CQRS e pg-boss garante uma arquitetura escalável e de fácil manutenção.
+ - **Boas Práticas**: O código é estruturado com boas práticas como Clean Architecture, Design Patterns e testes automatizados.
+ - **Docker**: Facilita a configuração do ambiente e o gerenciamento de dependências.
 
 ## Pontos de Melhoria
  - **Utilizar validações de schema na camada de domain**: Implementar validações de entidade na camada de domínio para garantir consistência de dados.

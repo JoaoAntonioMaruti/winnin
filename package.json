@@ -1,8 +1,10 @@
 {
   "name": "winnin",
-  "module": "lib/index.ts",
+  "module": "lib/appEntrypoint.ts",
   "scripts": {
     "start": "tsx lib/appEntrypoint.ts",
+    "db:create": "tsx lib/infra/cli/createDatabase.ts",
+    "db:migrate": "tsx lib/infra/cli/migrate.ts",
     "test": "jest --runInBand"
   },
   "devDependencies": {

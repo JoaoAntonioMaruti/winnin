@@ -1,9 +1,10 @@
+const Knex = require('knex');
 require('dotenv').config();
 
-module.exports = {
+export default Knex({
   client: 'pg',
   connection: process.env.DATABASE_CONNECTION_URL,
   migrations: {
     directory: './lib/infra/database/migrations'
   }
-};
+});
