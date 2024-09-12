@@ -1,6 +1,6 @@
 # Winnin Tech Challenge
 
-Este projeto é um desafio técnico que implementa uma API utilizando várias tecnologias modernas como GraphQL, PostgreSQL e processamento assíncrono com `pg-boss`.
+Este projeto é um [https://github.com/winnin/desafio/blob/master/BACKEND.md](desafio técnico) que implementa uma API utilizando várias tecnologia modernas como NodeJs, GraphQL, PostgreSQL e processamento assíncrono.
 
 ## Como Subir o Projeto
 
