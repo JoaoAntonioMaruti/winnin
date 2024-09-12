@@ -102,6 +102,7 @@ O projeto segue uma Clean Architecture, garantindo uma separação clara de resp
 
  - [ ] **Utilizar validações de schema na camada de domain**: Implementar validações de entidade na camada de domínio para garantir consistência de dados.
  - [ ] **Aumentar a cobertura de testes em geral**: Expandir a cobertura para incluir mais cenários, garantindo robustez do sistema em produção.
+ - [ ] **Tipagem**: Embora estou utilizando TypeScript, nem todos os valores estão tipados devidamente, então tem alguns tipos `any` no código.
  - [ ] **Tratamento de Erros**: Um sistema de logging mais robusto e integração com monitoramento de erros (ex.: Sentry) seria bom.
  - [ ] **Deploy e distribuiÇão**: Não terminei de configurar o deploy com fly.io (por isso a configuração do Docker não está pronta), mas tenho outros serviços que rodam por lá.
  - [ ] **Embora utilize um sistema de filas**, essas filas são gerenciadas pelo mesmo banco de dados da aplicação, o que pode gerar gargalos. Duas soluções recomendadas:
