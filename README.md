@@ -46,7 +46,7 @@ npm run db:migrate
 ### Para rodar o servidor em modo de desenvolvimento:
 
 ```bash
-npm run dev
+npm run start
 ```
 
 ### Execute os testes para verificar a integridade do sistema:
@@ -84,7 +84,7 @@ O projeto segue uma Clean Architecture, garantindo uma separação clara de resp
 ## Design Patterns
 
  - [x] **CQRS (Command Query Responsibility Segregation)**: Separa comandos [(escrita)](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/usecases/redditPost/mutator.ts) de consultas [(leitura)](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/usecases/redditPost/loader.ts)
- - [x] **Chain of Responsibility**: Processamento de requisições em cadeias de handlers, ex da implementação [aqui](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/usecases/redditPost/redditPipelineUseCase.ts) e chamada [aqui](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/infra/worker/redditPostWorker.ts#L13).
+ - [x] **Chain of Responsibility**: Processamento de requisições em cadeias de handlers, ex da implementação [aqui](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/usecases/redditPost/redditPipelineUseCase.ts) e chamada [aqui](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/infra/worker/redditPostWorker.ts#L20).
  - [x] **Repository Pattern**: Centraliza a lógica de persistência no banco de dados, ex: [aqui](https://github.com/JoaoAntonioMaruti/winnin/blob/main/lib/infra/database/repo.ts).
  - [x] **Factory Pattern**: Facilita a criação de instâncias para serviços e repositórios.
  - [x] **Decorator Pattern**: Adiciona responsabilidades extras a funções sem modificá-las diretamente.
