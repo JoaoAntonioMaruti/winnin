@@ -55,6 +55,10 @@ npm run start
 npm run test
 ```
 
+### GraphQL Playround
+
+Para testar queries GraphQL e ver os schemas, pode usar o Playround no seu host/playground
+
 ### Postman
 
 Para facilitar os testes você pode baixar a collection do Postman/Insominia [aqui](https://raw.githubusercontent.com/JoaoAntonioMaruti/winnin/main/support/winnin_collection.json)
