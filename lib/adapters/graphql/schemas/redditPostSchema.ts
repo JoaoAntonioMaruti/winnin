@@ -1,6 +1,11 @@
 import { gql } from 'apollo-server-express';
 
 const postSchema = gql`
+  enum SortBy {
+    ups
+    comments
+  }
+
   type Post {
     id: ID!
     title: String!
@@ -20,11 +25,11 @@ const postSchema = gql`
     posts(
       startDate: String!,
       endDate: String!,
-      sortBy: String!
+      sortBy: SortBy!
     ): [Post!]!
 
     authors(
-      sortBy: String!
+      sortBy: SortBy!
     ): [Author!]!
   }
  `;

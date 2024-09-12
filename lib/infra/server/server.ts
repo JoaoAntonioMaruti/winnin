@@ -16,5 +16,8 @@ export default async function startServer() {
     listen: { port: port },
   });
 
-  logger.info(`GraphQL server running on ${url}`);
+  logger.info(`
+  GraphQL server running on ${url}
+  GraphQL Playround running on ${url}playground`
+  );
 }

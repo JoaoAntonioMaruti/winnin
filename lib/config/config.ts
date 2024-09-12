@@ -1,6 +1,6 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 
 interface AppConfigInterface {
 	databaseConnectionUrl: string
@@ -16,4 +16,4 @@ const config: AppConfigInterface = {
 	cronScheduleConfig: process.env.CRON_SCHEDULE_CONFIG || '0 0 * * *'
 }
 
-export default config
+export default config;
