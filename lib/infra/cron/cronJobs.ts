@@ -1,20 +1,19 @@
 import config from '@lib/config';
 import cron from 'node-cron';
-import logger from '@infra/logger';
 import { redditPostQueue } from '@infra/queue/redditPostQueue';
 import { redditPostWorker } from '@infra/worker/redditPostWorker';
 
 export default async function createCronSchedules(executeScheduledJobs = config.executeScheduledJobs) {
-  if (executeScheduledJobs) {
-    cron.schedule('0 0 * * *', async () => {
-      redditPostWorker();
+  return executeScheduledJobs
+    ? cron.schedule(config.cronScheduleConfig, _redditTaskCron)
+    : null;
+}
 
-      await redditPostQueue();
-    });
-    return
-  }
+async function _redditTaskCron() {
+  const taskName = 'reddit-task';
+  const taskArgs = { subreddit: 'artificial' }
 
-  logger.warn("Cron job bypass");
-  return
+  await redditPostWorker(taskName);
+  await redditPostQueue(taskName, taskArgs);
 }
 
