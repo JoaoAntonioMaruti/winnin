@@ -55,6 +55,10 @@ npm run dev
 npm run test
 ```
 
+### Postman
+
+Para facilitar os testes você pode baixar a collection do Postman/Insominia [aqui](https://raw.githubusercontent.com/JoaoAntonioMaruti/winnin/main/support/winnin_collection.json)
+
 ## Tech Stack
 
 - **[Node.js](https://nodejs.org/)**: Ambiente de execução para JavaScript no backend.
